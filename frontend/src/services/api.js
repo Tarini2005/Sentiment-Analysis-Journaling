@@ -1,8 +1,5 @@
-// API endpoints and service functions for MoodJournal
-
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-// Get all journal entries
 export const getEntries = async () => {
   try {
     const response = await fetch(`${API_URL}/journal`);
@@ -16,7 +13,6 @@ export const getEntries = async () => {
   }
 };
 
-// Get a single journal entry
 export const getEntry = async (id) => {
   try {
     const response = await fetch(`${API_URL}/journal/${id}`);
@@ -30,7 +26,6 @@ export const getEntry = async (id) => {
   }
 };
 
-// Create a new journal entry
 export const createEntry = async (content) => {
   try {
     const response = await fetch(`${API_URL}/journal`, {
@@ -52,7 +47,6 @@ export const createEntry = async (content) => {
   }
 };
 
-// Get insights and recommendations
 export const getInsights = async () => {
   try {
     const response = await fetch(`${API_URL}/insights`);
@@ -66,7 +60,6 @@ export const getInsights = async () => {
   }
 };
 
-// Get mood timeline data
 export const getMoodTimeline = async () => {
   try {
     const response = await fetch(`${API_URL}/mood/timeline`);
