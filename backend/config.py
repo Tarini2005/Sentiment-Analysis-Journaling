@@ -10,7 +10,7 @@ class Config:
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     DEBUG_TB_INTERCEPT_REDIRECTS = False
-    CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
+    CACHE_TYPE = 'simple'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CORS_ORIGIN_WHITELIST = [
         'http://localhost:3000',
@@ -29,7 +29,7 @@ class DevConfig(Config):
     ENV = 'dev'
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///journal.db')
-    CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
+    CACHE_TYPE = 'simple'  
 
 
 class TestConfig(Config):
