@@ -24,31 +24,6 @@ MoodJournal is a journaling application that helps users track their emotional p
 - Recharts for data visualization
 - Responsive design with CSS
 
-## Project Structure
-
-```
-MoodJournal/
-│
-├── backend/               # Flask server
-│   ├── app.py             # Main application file
-│   ├── models.py          # Database models
-│   ├── sentiment_analyzer.py  # NLP sentiment analysis
-│   ├── insights_generator.py  # Pattern recognition
-│   ├── requirements.txt   # Python dependencies
-│   └── config.py          # Configuration settings
-│
-├── frontend/              # React frontend
-│   ├── public/            # Static files
-│   └── src/               # React source code
-│       ├── components/    # UI components
-│       ├── pages/         # Page components
-│       ├── services/      # API services
-│       ├── App.js         # Main app component
-│       └── styles.css     # Application styles
-│
-└── docker-compose.yml     # Docker configuration
-```
-
 ## Getting Started
 
 ### Prerequisites
