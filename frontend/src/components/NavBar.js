@@ -5,12 +5,10 @@ const NavBar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   
-  // Get current path
   const getCurrentPath = () => {
     return location.pathname;
   };
   
-  // Toggle mobile menu
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
