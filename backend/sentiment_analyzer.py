@@ -4,14 +4,8 @@ import re
 from textblob import TextBlob
 import numpy as np
 
-# Download NLTK resources (uncomment first time)
-# nltk.download('vader_lexicon')
-# nltk.download('punkt')
-
-# Initialize the NLTK Sentiment Analyzer
 sia = SentimentIntensityAnalyzer()
 
-# Define emotion keywords
 emotion_keywords = {
     'joy': ['happy', 'happiness', 'joy', 'excited', 'exciting', 'thrilled', 'delighted', 'pleased', 'elated', 
             'cheerful', 'content', 'glad', 'satisfied', 'grateful', 'thankful', 'love', 'loving'],
@@ -40,7 +34,6 @@ def analyze_sentiment(text):
     # Clean text
     text = re.sub(r'[^\w\s]', '', text.lower())
     
-    # Get overall sentiment using NLTK's VADER
     sentiment = sia.polarity_scores(text)
     compound_score = sentiment['compound']
     
@@ -55,7 +48,6 @@ def analyze_sentiment(text):
             score += sum(1 for word in words if keyword in word)
         emotions[emotion] = min(1.0, score / 10)  # Normalize to 0-1
     
-    # Use TextBlob for additional sentiment analysis
     blob = TextBlob(text)
     blob_polarity = blob.sentiment.polarity
     
@@ -67,7 +59,7 @@ def analyze_sentiment(text):
         'emotions': emotions
     }
 
-# Example usage
+
 if __name__ == "__main__":
     sample_text = "I had a really great day today. The weather was beautiful and I felt very happy."
     result = analyze_sentiment(sample_text)
