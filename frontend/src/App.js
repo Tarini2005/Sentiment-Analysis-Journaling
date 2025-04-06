@@ -15,7 +15,6 @@ function App() {
   });
   const [isLoading, setIsLoading] = useState(false);
   
-  // Fetch journal entries
   const fetchEntries = async () => {
     setIsLoading(true);
     try {
@@ -29,7 +28,6 @@ function App() {
     }
   };
   
-  // Fetch insights
   const fetchInsights = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/insights');
@@ -40,7 +38,6 @@ function App() {
     }
   };
   
-  // Add a new journal entry
   const addEntry = async (content) => {
     setIsLoading(true);
     try {
@@ -53,7 +50,6 @@ function App() {
       });
       
       if (response.ok) {
-        // Refresh entries and insights
         await fetchEntries();
         await fetchInsights();
       } else {
@@ -66,7 +62,6 @@ function App() {
     }
   };
   
-  // Load data on component mount
   useEffect(() => {
     fetchEntries();
     fetchInsights();
