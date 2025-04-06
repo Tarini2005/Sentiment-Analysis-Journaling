@@ -6,11 +6,6 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-# Download NLTK resources (uncomment first time)
-# nltk.download('stopwords')
-# nltk.download('punkt')
-
-# Initialize stopwords
 try:
     stop_words = set(stopwords.words('english'))
 except:
@@ -56,7 +51,7 @@ def find_mood_patterns(entries):
     
     # Check for overall trend
     if len(mood_scores) > 7:
-        # Simple linear regression to find trend
+        # Simple linear regression
         x = np.arange(len(mood_scores))
         slope, _ = np.polyfit(x, mood_scores, 1)
         
@@ -177,7 +172,7 @@ def generate_insights(entries):
         'mood_summary': mood_summary
     }
 
-# Example usage
+# Example
 if __name__ == "__main__":
     sample_entries = [
         {
