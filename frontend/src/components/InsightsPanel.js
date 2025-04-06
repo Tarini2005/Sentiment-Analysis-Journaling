@@ -3,7 +3,6 @@ import React from 'react';
 const InsightsPanel = ({ insights }) => {
   const { insights: insightsList, recommendations, mood_summary } = insights;
   
-  // Helper function to get emoji for mood score
   const getMoodEmoji = (score) => {
     if (score > 0.5) return '😊';
     if (score > 0) return '🙂';
@@ -11,7 +10,6 @@ const InsightsPanel = ({ insights }) => {
     return '😞';
   };
   
-  // Helper function to get color class based on mood score
   const getMoodColorClass = (score) => {
     if (score > 0.5) return 'positive';
     if (score > 0) return 'slightly-positive';
