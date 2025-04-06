@@ -1,21 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="MoodJournal - Track your emotional patterns through journaling"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <title>MoodJournal</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
-</html>
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import JournalPage from './pages/JournalPage';
+import SettingsPage from './pages/SettingsPage';
+import NavBar from './components/NavBar';
+import './styles.css';
+
+function App() {
+  const [entries, setEntries] = useState([]);
+  const [insights, setInsights] = useState({
+    insights: [],
+    recommendations: [],
+    mood_summary: {}
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Fetch journal entries
+  const fetchEntries = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/journal');
+      const data = await response.json();
+      setEntries(data);
+    } catch (error) {
+      console.error('Error fetching entries:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  // Fetch insights
+  const fetchInsights = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/insights');
+      const data = await response.json();
+      setInsights(data);
+    } catch (error) {
+      console.error('Error fetching insights:', error);
+    }
+  };
+  
+  // Add a new journal entry
+  const addEntry = async (content) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/journal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content }),
+      });
+      
+      if (response.ok) {
+        // Refresh entries and insights
+        await fetchEntries();
+        await fetchInsights();
+      } else {
+        console.error('Failed to add entry');
+      }
+    } catch (error) {
+      console.error('Error adding entry:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  // Load data on component mount
+  useEffect(() => {
+    fetchEntries();
+    fetchInsights();
+  }, []);
+  
+  return (
+    <Router>
+      <div className="app">
+        <NavBar />
+        <div className="content">
+          <Routes>
+            <Route 
+              path="/" 
+              element={<Dashboard entries={entries} insights={insights} isLoading={isLoading} />} 
+            />
+            <Route 
+              path="/journal" 
+              element={<JournalPage entries={entries} addEntry={addEntry} isLoading={isLoading} />} 
+            />
+            <Route 
+              path="/settings" 
+              element={<SettingsPage />} 
+            />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
