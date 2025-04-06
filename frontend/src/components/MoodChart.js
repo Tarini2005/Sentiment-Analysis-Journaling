@@ -15,11 +15,10 @@ import {
 const MoodChart = ({ entries }) => {
   const [chartData, setChartData] = useState([]);
   const [emotionData, setEmotionData] = useState([]);
-  const [viewMode, setViewMode] = useState('line'); // 'line' or 'bar'
-  const [timeFrame, setTimeFrame] = useState('month'); // 'week', 'month', 'all'
+  const [viewMode, setViewMode] = useState('line'); 
+  const [timeFrame, setTimeFrame] = useState('month'); 
   
   useEffect(() => {
-    // Process entries for chart display
     if (entries.length === 0) return;
     
     // Filter entries by time frame
@@ -40,7 +39,7 @@ const MoodChart = ({ entries }) => {
       return {
         date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         mood: entry.mood_score,
-        timestamp: date.getTime() // For sorting
+        timestamp: date.getTime()
       };
     });
     
@@ -49,7 +48,6 @@ const MoodChart = ({ entries }) => {
     
     setChartData(moodData);
     
-    // Process emotion data
     const emotions = ['joy', 'sadness', 'anger', 'fear', 'surprise', 'calm'];
     const processedEmotions = emotions.map(emotion => {
       return {
@@ -61,7 +59,6 @@ const MoodChart = ({ entries }) => {
     setEmotionData(processedEmotions);
   }, [entries, timeFrame]);
   
-  // Custom tooltip for the line chart
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
