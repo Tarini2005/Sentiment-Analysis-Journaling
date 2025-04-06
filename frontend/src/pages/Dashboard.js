@@ -4,7 +4,6 @@ import MoodChart from '../components/MoodChart';
 import InsightsPanel from '../components/InsightsPanel';
 
 const Dashboard = ({ entries, insights, isLoading }) => {
-  // Get recent entries
   const recentEntries = entries.slice(0, 3);
   
   return (
