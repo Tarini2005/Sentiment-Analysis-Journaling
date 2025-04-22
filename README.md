@@ -34,8 +34,8 @@ MoodJournal is a journaling application that helps users track their emotional p
 ### Running with Docker
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/mood-journal.git
-   cd mood-journal
+   git clone https://github.com/Tarini2005/Sentiment-Analysis-Journaling.git
+   cd entiment-Analysis-Journaling
    ```
 
 2. Start the application with Docker Compose
